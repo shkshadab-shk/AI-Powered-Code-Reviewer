@@ -1,14 +1,27 @@
-require('dotenv').config()
-const app = require('./src/app')
+const express = require('express');
+const aiRoutes = require('./routes/ai.routes')
+const cors = require('cors')
+const app = express()
 
-const PORT = process.env.PORT || 3000
+// Configure CORS for your frontend domain
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'https://your-frontend-domain.vercel.app', // Replace with your actual frontend URL
+    process.env.FRONTEND_URL // Add this to your Vercel env variables
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+}))
 
-// Only listen in development (not on Vercel)
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`)
-  })
-}
+app.use(express.json())
 
-// Export for Vercel serverless
+app.get('/', (req, res) => {
+  res.send('Hello World')
+})
+
+app.use('/ai', aiRoutes)
+
 module.exports = app
