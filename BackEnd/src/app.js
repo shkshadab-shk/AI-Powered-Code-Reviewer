@@ -1,16 +1,14 @@
-const express = require('express');
-const aiRoutes = require('./routes/ai.routes')
-const cors = require('cors')
-const app = express()
+require('dotenv').config()
+const app = require('./src/app')
 
-app.use(cors())
+const PORT = process.env.PORT || 3000
 
-app.use(express.json())
+// Only listen in development (not on Vercel)
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`)
+  })
+}
 
-app.get('/', (req,res) =>{
-    res.send('Hello World')
-})
-
-app.use('/ai' , aiRoutes )
-
+// Export for Vercel serverless
 module.exports = app
