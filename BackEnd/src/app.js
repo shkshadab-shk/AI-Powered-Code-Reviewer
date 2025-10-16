@@ -9,7 +9,7 @@ app.use(cors({
     'http://localhost:3000',
     'http://localhost:5173',
     'http://localhost:5174',
-    'https://your-frontend-domain.vercel.app', // Replace with your actual frontend URL
+    'https://aicodereview-one.vercel.app/', // Replace with your actual frontend URL
     process.env.FRONTEND_URL // Add this to your Vercel env variables
   ],
   credentials: true,
