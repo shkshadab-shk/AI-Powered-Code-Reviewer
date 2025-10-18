@@ -4,7 +4,7 @@ const cors = require('cors')
 
 const app = express()
 
-app.use(cors())
+app.use(cors(https://aicodereview-one.vercel.app))
 
 
 app.use(express.json())
