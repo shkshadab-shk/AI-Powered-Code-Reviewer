@@ -4,14 +4,13 @@ const cors = require('cors')
 
 const app = express()
 
-app.use(cors(https://aicodereview-one.vercel.app))
-
-
-app.use(express.json())
-
-app.get('/', (req, res) => {
-    res.send('Hello World')
-})
+app.use(cors({
+  origin: [
+    'https://aicodereview-one.vercel.app'  // ✅ Add your frontend URL
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+}))
 
 app.use('/ai', aiRoutes)
 
